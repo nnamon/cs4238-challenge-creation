@@ -22,7 +22,7 @@ chmod 1733 /tmp /var/tmp /dev/shm  # Prevent leaking user solutions
 
 ## Cryptography
 
-* Length extension attacks.
+* Length extension attacks. (void)
 * CBC manipulation.
 * Predictable seed to random number generator.
 
