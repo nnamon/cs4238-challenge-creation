@@ -21,3 +21,9 @@
         group: "{{ level }}"
         owner: "{{ level }}"
         mode: 0400
+
+    - name: present instructions when logging into level
+      lineinfile:
+        path: "/home/{{ level }}/.bashrc"
+        insertafter: EOF
+        line: "cat $HOME/docs/instructions"
