@@ -2,6 +2,7 @@
 - hosts: localhost
   vars:
     level: level00
+    homedir: "/home/{{ level }}"
   tasks:
     - name: create user
       user:
@@ -11,19 +12,19 @@
 
     - name: set user home directory permissions
       file:
-        path: "/home/{{ level }}"
+        path: "{{ homedir }}"
         mode: 0700
 
     - name: copy instructions, hints and solution
       copy:
         src:  "challenges/{{ level }}/docs"
-        dest: "/home/{{ level }}"
+        dest: "{{ homedir }}"
         group: "{{ level }}"
         owner: "{{ level }}"
         mode: 0400
 
     - name: present instructions when logging into level
       lineinfile:
-        path: "/home/{{ level }}/.bashrc"
+        path: "{{ homedir }}/.bashrc"
         insertafter: EOF
-        line: "cat $HOME/docs/instructions"
+        line: "cat {{ homedir }}/docs/instructions"
