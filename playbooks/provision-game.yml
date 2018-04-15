@@ -1,9 +1,0 @@
----
-- hosts: localhost
-  tasks:
-    - name: create user level00
-      user:
-        name: level00
-        password: $5$oDfglsSRA.ojUUDY$SRlh.ti7Y/U8.ibkGWuelptkdOzhmrcI4mvcAV0NdAD
-        create_home: yes
-        shell: /bin/bash

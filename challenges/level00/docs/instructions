@@ -1,0 +1,19 @@
+# INSTRUCTIONS
+## Level 00 - Getting to know the game
+Cool, you've manned this page.
+
+---
+
+
+
+
+
+
+
+Your password to level01 is `somepassword`.
+
+You may now 'su' to the next level.
+
+```sh
+su level01
+```

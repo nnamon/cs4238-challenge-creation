@@ -5,10 +5,16 @@ First install ansible on your machine. Refer to the docs:
 
 http://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 
-Once installed, execute the `ansible-playbook` command  from the playbooks directory.
+Once installed, to provision the game on your local machine (`localhost`), execute the `ansible-playbook` command.
 
 ```sh
-cd playbooks
 sudo ansible-playbook provision-game.yml
 ```
 
+
+
+## level0 - orientation - introduce the workflow of the game.
+
+1. ssh level0@<hostip>
+2. welcome message (/etc/issue) instructing you to open the man level0has instructions
+3.
