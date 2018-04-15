@@ -13,3 +13,11 @@
       file:
         path: "/home/{{ level }}"
         mode: 0700
+
+    - name: copy instructions, hints and solution
+      copy:
+        src:  "challenges/{{ level }}/docs"
+        dest: "/home/{{ level }}"
+        group: "{{ level }}"
+        owner: "{{ level }}"
+        mode: 0400
