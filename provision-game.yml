@@ -4,16 +4,17 @@
     level: level00
     homedir: "/home/{{ level }}"
   tasks:
-    - name: create user
-      user:
-        name: "{{ level }}"
-        password: $5$oDfglsSRA.ojUUDY$SRlh.ti7Y/U8.ibkGWuelptkdOzhmrcI4mvcAV0NdAD
-        shell: /bin/bash
-
-    - name: set user home directory permissions
-      file:
-        path: "{{ homedir }}"
-        mode: 0700
+    - name: create level
+      block:
+        - name: create user
+          user:
+            name: "{{ level }}"
+            password: $5$oDfglsSRA.ojUUDY$SRlh.ti7Y/U8.ibkGWuelptkdOzhmrcI4mvcAV0NdAD
+            shell: /bin/bash
+        - name: set homedir permissions
+          file:
+            path: "{{ homedir }}"
+            mode: 0700
 
     - name: copy instructions, hints and solution
       copy:
