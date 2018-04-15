@@ -1,9 +1,15 @@
 ---
 - hosts: localhost
+  vars:
+    level: level00
   tasks:
-    - name: create user level00
+    - name: create user
       user:
-        name: level00
+        name: "{{ level }}"
         password: $5$oDfglsSRA.ojUUDY$SRlh.ti7Y/U8.ibkGWuelptkdOzhmrcI4mvcAV0NdAD
-        create_home: yes
         shell: /bin/bash
+
+    - name: set user home directory permissions
+      file:
+        path: "/home/{{ level }}"
+        mode: 0700
