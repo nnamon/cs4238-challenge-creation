@@ -1,6 +1,6 @@
 ---
 
-- name: say hello from level00
+- name: put --help in homedir
   copy:
     dest: "{{ homedir }}/--help"
     src: "src/--help"
