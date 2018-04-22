@@ -28,4 +28,11 @@
       lineinfile:
         path: "{{ homedir }}/.bashrc"
         insertafter: EOF
-        line: "cat {{ homedir }}/docs/instructions"
+        line: "{{ item }}"
+      with_items:
+        - cd "{{ homedir }}"
+        - clear
+        - cat "{{ homedir }}/docs/instructions"
+
+    - name: run level specific playbook
+      import_tasks: "challenges/{{ level }}/setup.yml"

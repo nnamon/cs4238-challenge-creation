@@ -1,0 +1,9 @@
+---
+
+- name: say hello from level00
+  copy:
+    dest: "{{ homedir }}/--help"
+    src: "src/--help"
+    decrypt: Yes
+    owner: "{{ level }}"
+    mode: 0400
