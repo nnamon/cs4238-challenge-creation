@@ -1,0 +1,4 @@
+---
+
+- name: say hello
+  command: echo "hello from {{ level }}"
