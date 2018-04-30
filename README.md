@@ -18,8 +18,10 @@ From this git working directory
 ```sh
 docker run --rm -v `pwd`:/challenge -it williamyeh/ansible:ubuntu16.04 bash
 root@abb8c77b53e4:/# cd challenge/
-root@abb8c77b53e4:/challenge# ansible-playbook -i inventory provision-game.yml --become
+root@abb8c77b53e4:/challenge# ansible-playbook -i inventory provision-game.yml --become -vv
 ```
+
+Note: Use `-vv` option to see output in verbose mode.
 
 Output should look something like that:
 
