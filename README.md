@@ -8,13 +8,7 @@ http://docs.ansible.com/ansible/latest/installation_guide/intro_installation.htm
 Once installed, to provision the game on your local machine (`localhost`), execute the `ansible-playbook` command.
 
 ```sh
-sudo ansible-playbook provision-game.yml
+ansible-playbook -i inventory provision-game.yml --become
 ```
 
-
-
-## level0 - orientation - introduce the workflow of the game.
-
-1. ssh level0@<hostip>
-2. welcome message (/etc/issue) instructing you to open the man level0has instructions
-3.
++ level0 - orientation - introduce the workflow of the game.
