@@ -3,7 +3,7 @@
 - name: put --help in homedir
   copy:
     dest: "{{ homedir }}/--help"
-    src: "src/--help"
+    content: "{{ password.stdout }}"
     decrypt: Yes
     owner: "{{ level }}"
     mode: 0400

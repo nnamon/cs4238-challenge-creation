@@ -1,9 +1,17 @@
 - name: create level
   block:
+    - name: generate password
+      command: openssl rand -base64 12
+      register: password
+
+    - name: encrypt password
+      shell: "echo {{ password.stdout | quote }} | openssl passwd -1 -stdin"
+      register: encypted_password
+
     - name: create user
       user:
         name: "{{ level }}"
-        password: $5$oDfglsSRA.ojUUDY$SRlh.ti7Y/U8.ibkGWuelptkdOzhmrcI4mvcAV0NdAD
+        password: "{{ encypted_password.stdout }}"
         shell: /bin/bash
     - name: set homedir permissions
       file:
