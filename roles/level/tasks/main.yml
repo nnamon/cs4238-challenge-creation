@@ -1,0 +1,40 @@
+- name: create level
+  block:
+    - name: generate password
+      command: openssl rand -base64 12
+      register: password
+
+    - name: encrypt password
+      shell: "echo {{ password.stdout | quote }} | openssl passwd -1 -stdin"
+      register: encypted_password
+
+    - name: create user
+      user:
+        name: "{{ level }}"
+        password: "{{ encypted_password.stdout }}"
+        shell: /bin/bash
+    - name: set homedir permissions
+      file:
+        path: "{{ homedir }}"
+        mode: 0700
+
+- name: copy instructions, hints and solution
+  copy:
+    src:  "challenges/{{ level }}/docs"
+    dest: "{{ homedir }}"
+    group: "{{ level }}"
+    owner: "{{ level }}"
+    mode: 0400
+
+- name: present instructions when logging into level
+  lineinfile:
+    path: "{{ homedir }}/.bashrc"
+    insertafter: EOF
+    line: "{{ item }}"
+  with_items:
+    - cd "{{ homedir }}"
+    - clear
+    - cat "{{ homedir }}/docs/instructions"
+
+- name: run level specific playbook
+  import_tasks: "challenges/{{ level }}/setup.yml"
