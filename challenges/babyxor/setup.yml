@@ -1,0 +1,9 @@
+---
+
+- name: put the contents of distrib into the home directory
+  copy:
+    src: "distrib/"
+    dest: "{{ homedir }}/"
+    owner: "root"
+    group: "{{ level }}"
+    mode: 0440

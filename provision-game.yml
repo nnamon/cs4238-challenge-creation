@@ -1,5 +1,12 @@
 ---
-- hosts: localhost
+- hosts: all
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  become_user: root
+  pre_tasks:
+    - name: 'install python2'
+      raw: sudo apt-get -y install python-simplejson
   tasks:
     - include_role:
         name: level
@@ -8,5 +15,6 @@
       loop:
         - level00
         - level01
+        - introstrings
       loop_control:
         loop_var: level
