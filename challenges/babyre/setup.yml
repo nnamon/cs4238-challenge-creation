@@ -1,0 +1,20 @@
+---
+
+- name: update repositories cache and install dependencies
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - gdb
+
+- name: put the contents of distrib into the home directory
+  copy:
+    src: "distrib/"
+    dest: "{{ homedir }}/"
+    owner: "root"
+    group: "{{ level }}"
+    mode: 0440
+
+- name: make babyre executable
+  file:
+    path: "{{ homedir }}/babyre"
+    mode: 0550
