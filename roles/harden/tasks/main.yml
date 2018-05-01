@@ -6,3 +6,6 @@
 
 - name: Prevent users from viewing each other's solutions in the temp dirs
   shell: chmod 1733 /tmp /var/tmp /dev/shm
+
+- name: Ensure that all directories in /home are no viewable by default
+  shell: chmod 700 /home/*
