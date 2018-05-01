@@ -30,6 +30,7 @@
         name: "{{ level }}"
         password: "{{ encypted_password.stdout }}"
         shell: /bin/bash
+        groups: leveluser
 
 - name: copy instructions, hints and solution
   copy:

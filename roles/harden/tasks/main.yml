@@ -1,10 +1,10 @@
-- name: Prevent users from viewing process information.
+- name: prevent users from viewing process information.
   shell: mount -o remount,hidepid=2 /proc
 
-- name: Prevent users from viewing kernel debug messages
+- name: prevent users from viewing kernel debug messages
   shell: sysctl -w kernel.dmesg_restrict=1
 
-- name: Prevent users from viewing each other's solutions in the temp dirs
+- name: prevent users from viewing each other's solutions in the temp dirs
   file:
     path: "{{ item }}"
     mode: 01733
@@ -12,3 +12,9 @@
     - "/tmp"
     - "/var/tmp"
     - "/dev/shm"
+
+- name: prevent resource exhaustion attacks
+  lineinfile:
+    path: "/etc/security/limits.conf"
+    insertafter: EOF
+    line: "@leveluser hard nproc 64"
