@@ -1,6 +1,8 @@
 # SOLUTION
 
 ```shell
-$ strings -a introstrings  | grep password
-The password is: I_Hide_Qui3tly_In_this_Bin
+$ nc wargame 31337
+What fell on Issac Newton's head?
+apple
+That's right! Here's your password: V4st_oc3ans_0f_truth
 ```

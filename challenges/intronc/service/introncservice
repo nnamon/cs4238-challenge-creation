@@ -6,7 +6,7 @@ service introncservice
     wait        = no
     user        = introncservice
     bind        = 0.0.0.0
-    server      = /service/intronc/
+    server      = /service/introncservice/intronc.py
     type        = UNLISTED
     port        = 31337
 }

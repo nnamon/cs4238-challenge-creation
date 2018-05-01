@@ -1,25 +1,53 @@
 ---
 
+- name: set the serviceuser fact
+  set_fact:
+    serviceuser: introncservice
+
 - name: Update repositories cache and install dependencies
   apt:
     name: xinetd
 
-- name: create user
+- name: create service user
   user:
-    name: "introncservice"
+    name: "{{ serviceuser }}"
     shell: /bin/false
-    home: "/service/intronc"
+    home: "/service/{{ serviceuser }}"
+    groups: "leveluser"
 
 - name: put the contents of service into the service account home directory
   copy:
     src: "service/"
-    dest: "/service/introncservice"
+    dest: "/service/{{ serviceuser }}"
     owner: "root"
-    group: "introncservice"
-    mode: 0440
+    group: "{{ serviceuser }}"
 
-- name: prevent resource exhaustion attacks
-  lineinfile:
-    path: "/etc/security/limits.conf"
-    insertafter: EOF
-    line: "@leveluser hard nproc 64"
+- name: set the directory permissions
+  block:
+    - name: tighten the permissions
+      file:
+        recurse: yes
+        mode: 440
+        path: "/service/{{ serviceuser }}"
+    - name: relax the permissions
+      file:
+        recurse: yes
+        owner: root
+        group: "{{ serviceuser }}"
+        path: "/service/{{ serviceuser }}"
+        mode: u=rwX,g=rX,o=
+
+- name: setup the xinetd configuration files
+  copy:
+    src: "service/introncservice"
+    dest: "/etc/xinetd.d/"
+
+- name: make the python script executable
+  file:
+    path: "/service/introncservice/intronc.py"
+    mode: 0450
+
+- name: restart xinetd
+  service:
+    name: xinetd
+    state: restarted
