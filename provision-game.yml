@@ -36,8 +36,8 @@
         state: directory
         owner: root
         group: root
-        mode: 0700
-
+        mode: 0711
+        
     - include_role:
         name: level
       vars:
