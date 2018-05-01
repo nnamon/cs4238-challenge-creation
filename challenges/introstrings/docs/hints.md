@@ -1,3 +1,3 @@
 # HINTS
 
-Try using `scp`, or get creative with `curl` or `nc`.
+You might want to figure out what strings are in the binary.
