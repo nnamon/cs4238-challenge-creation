@@ -1,6 +1,14 @@
 # cs4238-challenge-creation
 
+## Skip the docs and get playing
+
+```sh
+$ ssh level00@<machine>
+```
+> Password: `GowG2kEEg8ON97RL`
+
 ## How to provision the game
+### ...on local machine
 First install ansible on your machine. Refer to the docs:
 
 http://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
@@ -11,7 +19,7 @@ Once installed, to provision the game on your local machine (`localhost`), execu
 ansible-playbook -i inventory provision-game.yml --become
 ```
 
-## Provision on Ubuntu-ansible Docker container (for testing)
+### ...on Ubuntu-ansible Docker container (for testing)
 
 From this git working directory
 
