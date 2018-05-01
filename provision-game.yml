@@ -18,3 +18,4 @@
         - introstrings
       loop_control:
         loop_var: level
+        index_var: level_num

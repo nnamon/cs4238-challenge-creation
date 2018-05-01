@@ -1,11 +1,18 @@
 - name: create level
   block:
-    - name: generate password
-      command: openssl rand -base64 12
-      register: password
+    - name: lookup password from password file
+      set_fact: "{{ level }}_password={{ lookup('file', 'challenges/{{ level }}/src/password') }}"
+
+    - name: check for next level password file
+      local_action: stat path="challenges/level0{{ level_num + 1 }}/src/password"
+      register: next_level_password_file
+
+    - name: define levelXX_flag variable - i.e. password for next level
+      set_fact: "{{ level }}_flag={{ lookup('file', 'challenges/level0{{ level_num + 1 }}/src/password')}}"
+      when: next_level_password_file.stat.exists
 
     - name: encrypt password
-      shell: "echo {{ password.stdout | quote }} | openssl passwd -1 -stdin"
+      shell: "echo {{ vars[level + '_password'] | quote }} | openssl passwd -1 -stdin"
       register: encypted_password
 
     - name: create user

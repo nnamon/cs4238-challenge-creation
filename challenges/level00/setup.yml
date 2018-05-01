@@ -3,7 +3,6 @@
 - name: put --help in homedir
   copy:
     dest: "{{ homedir }}/--help"
-    content: "{{ password.stdout }}"
-    decrypt: Yes
+    content: "{{ level00_flag }}"
     owner: "{{ level }}"
     mode: 0400
