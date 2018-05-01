@@ -5,4 +5,10 @@
   shell: sysctl -w kernel.dmesg_restrict=1
 
 - name: Prevent users from viewing each other's solutions in the temp dirs
-  shell: chmod 1733 /tmp /var/tmp /dev/shm
+  file:
+    path: "{{ item }}"
+    mode: 01733
+  with_items:
+    - "/tmp"
+    - "/var/tmp"
+    - "/dev/shm"

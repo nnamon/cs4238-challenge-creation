@@ -53,9 +53,11 @@
     insertafter: EOF
     line: "{{ item }}"
   with_items:
-    - cd "{{ homedir }}"
     - clear
-    - cat "{{ homedir }}/docs/instructions.md"
+    - alias instructions='mdless "{{ homedir }}"/docs/instructions.md'
+    - alias hints='mdless "{{ homedir }}"/docs/hints.md'
+    - alias solution='mdless "{{ homedir }}"/docs/solution.md'
+    - instructions
 
 - name: run level specific playbook
   import_tasks: "challenges/{{ level }}/setup.yml"
