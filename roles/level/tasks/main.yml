@@ -1,3 +1,12 @@
+- name: install mdless
+  block:
+    - name: install ruby
+      apt:
+        name: ruby
+
+    - name: install mdless
+      shell: "gem install mdless"
+
 - name: create level
   block:
     - name: lookup password from password file
@@ -21,10 +30,14 @@
         name: "{{ level }}"
         password: "{{ encypted_password.stdout }}"
         shell: /bin/bash
+
     - name: set homedir permissions
       file:
+        recurse: yes
+        owner: root
+        group: "{{ level }}"
         path: "{{ homedir }}"
-        mode: 0700
+        mode: 0750
 
 - name: copy instructions, hints and solution
   copy:

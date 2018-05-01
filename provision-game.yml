@@ -6,6 +6,9 @@
     - name: 'install python2'
       raw: sudo apt-get -y install python-simplejson
   tasks:
+    - name: Update APT Cache
+      apt:
+          update_cache: yes
     - include_role:
         name: level
       vars:
@@ -19,6 +22,4 @@
         index_var: level_num
     - include_role:
         name: harden
-    - name: Update APT Cache
-      apt:
-          update_cache: yes
+

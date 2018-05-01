@@ -4,5 +4,6 @@
   copy:
     dest: "{{ homedir }}/--help"
     content: "{{ level00_flag }}"
-    owner: "{{ level }}"
-    mode: 0400
+    owner: "root"
+    group: "{{ level }}"
+    mode: 0440
