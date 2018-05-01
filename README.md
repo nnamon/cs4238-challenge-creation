@@ -60,4 +60,57 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=6    changed=5    unreachable=0    failed=0
 ```
 
-+ level0 - orientation - introduce the workflow of the game.
+### Vagrant Development Environment
+
+To bring up a local development environment, do the following:
+
+```shell
+$ vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Importing base box 'ubuntu/xenial64'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'ubuntu/xenial64' is up to date...
+==> default: Setting the name of the VM: cs4238-challenge-creation_default_1525167254976_91331
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+...
+==> default: Running provisioner: ansible...
+    default: Running ansible-playbook...
+PYTHONUNBUFFERED=1 ANSIBLE_FORCE_COLOR=true ANSIBLE_HOST_KEY_CHECKING=false ANSIBLE_SSH_ARGS='-o UserKnownHostsFile=/dev/null -o IdentitiesOnly=yes -o ControlMaster=auto -o ControlPersist=60s' ansible-playbook --connection=ssh --timeout=30 --limit="default" --inventory-file=/Users/amon/school/cs4238-challenge-creation/.vagrant/provisioners/ansible/inventory -v provision-game.yml
+Using /Users/amon/school/cs4238-challenge-creation/ansible.cfg as config file
+
+PLAY [all] *********************************************************************
+
+TASK [install python2] *********************************************************
+...
+$ vagrant ssh
+vagrant ssh
+Welcome to Ubuntu 16.04.4 LTS (GNU/Linux 4.4.0-122-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+0 packages can be updated.
+0 updates are security updates.
+
+
+Last login: Tue May  1 09:36:22 2018 from 10.0.2.2
+vagrant@ubuntu-xenial:~$
+```
+
+## Workflow
++ level00 - orientation - introduce the workflow of the game.
+

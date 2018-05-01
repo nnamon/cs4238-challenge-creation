@@ -3,7 +3,6 @@
 - name: Update repositories cache and install dependencies
   apt:
     name: binutils
-    update_cache: yes
 
 - name: put the contents of distrib into the home directory
   copy:

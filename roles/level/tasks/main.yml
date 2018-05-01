@@ -4,6 +4,7 @@
       set_fact: "{{ level }}_password={{ lookup('file', 'challenges/{{ level }}/src/password') }}"
 
     - name: check for next level password file
+      become: false
       local_action: stat path="{{ 'challenges/level%02d/src/password' | format(level_num + 1) }}"
       register: next_level_password_file
 
