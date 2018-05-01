@@ -41,7 +41,7 @@
   with_items:
     - cd "{{ homedir }}"
     - clear
-    - cat "{{ homedir }}/docs/instructions"
+    - cat "{{ homedir }}/docs/instructions.md"
 
 - name: run level specific playbook
   import_tasks: "challenges/{{ level }}/setup.yml"
