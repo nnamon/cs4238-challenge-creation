@@ -1,0 +1,12 @@
+service introncservice
+{
+    disable = no
+    socket_type = stream
+    protocol    = tcp
+    wait        = no
+    user        = intropwntoolsservice
+    bind        = 0.0.0.0
+    server      = /service/intropwntoolsservice/server.py
+    type        = UNLISTED
+    port        = 31338
+}
