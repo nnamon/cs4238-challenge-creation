@@ -31,14 +31,6 @@
         password: "{{ encypted_password.stdout }}"
         shell: /bin/bash
 
-    - name: set homedir permissions
-      file:
-        recurse: yes
-        owner: root
-        group: "{{ level }}"
-        path: "{{ homedir }}"
-        mode: 0750
-
 - name: copy instructions, hints and solution
   copy:
     src:  "challenges/{{ level }}/docs"
@@ -58,6 +50,21 @@
     - alias hints='mdless "{{ homedir }}"/docs/hints.md'
     - alias solution='mdless "{{ homedir }}"/docs/solution.md'
     - instructions
+
+- name: set homedir permissions
+  block:
+    - name: tighten the permissions
+      file:
+        recurse: yes
+        mode: 000
+        path: "{{ homedir }}"
+    - name: relax the permissions
+      file:
+        recurse: yes
+        owner: root
+        group: "{{ level }}"
+        path: "{{ homedir }}"
+        mode: u=rwX,g=rX,o=
 
 - name: run level specific playbook
   import_tasks: "challenges/{{ level }}/setup.yml"

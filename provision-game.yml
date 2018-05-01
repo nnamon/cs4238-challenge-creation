@@ -6,9 +6,21 @@
     - name: 'install python2'
       raw: sudo apt-get -y install python-simplejson
   tasks:
-    - name: Update APT Cache
+    - name: update apt cache
       apt:
           update_cache: yes
+    - name: add an entry to /etc/hosts
+      lineinfile:
+        path: "/etc/hosts"
+        insertafter: EOF
+        line: "127.0.0.1       wargame"
+    - name: create a directory to hold services
+      file:
+        path: /service/
+        state: directory
+        owner: root
+        group: root
+        mode: 0700
     - include_role:
         name: level
       vars:
@@ -16,7 +28,7 @@
       loop:
         - level00
         - level01
-        - introstrings
+        - intronc
       loop_control:
         loop_var: level
         index_var: level_num
