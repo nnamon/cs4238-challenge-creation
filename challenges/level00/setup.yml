@@ -7,3 +7,9 @@
     owner: "root"
     group: "{{ level }}"
     mode: 0440
+
+- name: cd to homedir on login
+  lineinfile:
+    path: "{{ homedir }}/.bashrc"
+    insertafter: EOF
+    line: "cd {{ homedir }}"
