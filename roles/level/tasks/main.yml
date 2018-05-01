@@ -1,12 +1,3 @@
-- name: install mdless
-  block:
-    - name: install ruby
-      apt:
-        name: ruby
-
-    - name: install mdless
-      shell: "gem install mdless"
-
 - name: create level
   block:
     - name: lookup password from password file
