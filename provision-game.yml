@@ -25,6 +25,11 @@
         insertafter: EOF
         line: "127.0.0.1       wargame"
 
+    - name: create the group leveluser to apply security policies to all levels
+      group:
+        name: leveluser
+        state: present
+
     - name: create a directory to hold services
       file:
         path: /service/
