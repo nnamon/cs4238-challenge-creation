@@ -1,0 +1,25 @@
+---
+
+- name: Update repositories cache and install dependencies
+  apt:
+    name: xinetd
+
+- name: create user
+  user:
+    name: "introncservice"
+    shell: /bin/false
+    home: "/service/intronc"
+
+- name: put the contents of service into the service account home directory
+  copy:
+    src: "service/"
+    dest: "/service/introncservice"
+    owner: "root"
+    group: "introncservice"
+    mode: 0440
+
+- name: prevent resource exhaustion attacks
+  lineinfile:
+    path: "/etc/security/limits.conf"
+    insertafter: EOF
+    line: "@leveluser hard nproc 64"
