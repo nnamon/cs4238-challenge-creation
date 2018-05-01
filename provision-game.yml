@@ -9,11 +9,22 @@
     - name: update apt cache
       apt:
           update_cache: yes
+
+    - name: install mdless
+      block:
+        - name: install ruby
+          apt:
+            name: ruby
+
+        - name: install mdless
+          shell: "gem install mdless"
+
     - name: add an entry to /etc/hosts
       lineinfile:
         path: "/etc/hosts"
         insertafter: EOF
         line: "127.0.0.1       wargame"
+
     - name: create a directory to hold services
       file:
         path: /service/
@@ -21,6 +32,7 @@
         owner: root
         group: root
         mode: 0700
+
     - include_role:
         name: level
       vars:
@@ -32,6 +44,6 @@
       loop_control:
         loop_var: level
         index_var: level_num
+
     - include_role:
         name: harden
-
