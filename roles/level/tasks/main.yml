@@ -4,11 +4,11 @@
       set_fact: "{{ level }}_password={{ lookup('file', 'challenges/{{ level }}/src/password') }}"
 
     - name: check for next level password file
-      local_action: stat path="challenges/level0{{ level_num + 1 }}/src/password"
+      local_action: stat path="{{ 'challenges/level%02d/src/password' | format(level_num + 1) }}"
       register: next_level_password_file
 
     - name: define levelXX_flag variable - i.e. password for next level
-      set_fact: "{{ level }}_flag={{ lookup('file', 'challenges/level0{{ level_num + 1 }}/src/password')}}"
+      set_fact: "{{ level }}_flag={{ lookup('file', '{{ next_level_password_file.stat.path }}' )}}"
       when: next_level_password_file.stat.exists
 
     - name: encrypt password
