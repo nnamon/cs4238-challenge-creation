@@ -1,5 +1,15 @@
 ---
 
+- name: update repositories cache and install dependencies
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - python-pip
+
+- name: install xortool
+  pip:
+    name: xortool
+
 - name: put the contents of distrib into the home directory
   copy:
     src: "distrib/"

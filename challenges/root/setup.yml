@@ -1,0 +1,12 @@
+---
+
+- name: copy congratulations message
+  copy:
+    src: "src/congrats.ans"
+    dest: "/root/congrats.ans"
+
+- name: display congratulations message
+  lineinfile:
+    path: "/root/.bashrc"
+    insertafter: EOF
+    line: "cat /root/congrats.ans"

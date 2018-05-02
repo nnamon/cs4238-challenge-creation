@@ -1,8 +1,8 @@
 # INSTRUCTIONS
 #
-## Level XX - Introduction: Pwntools
+## Level &LEVELNUMBER&: Introduction - Pwntools
 
-> Challenge: Find the password to levelXX
+> Challenge: Find the password to **&NEXTLEVELTITLE&**
 
 Pwntools is a great tool to automate your exploits. Try writing a script to get
 the password from `wargame:31338`.

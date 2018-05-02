@@ -1,8 +1,8 @@
 # INSTRUCTIONS
 #
-## Level XX - Introduction: Create a Home of Your Own
+## Level &LEVELNUMBER&: Introduction - Create a Home of Your Own
 
-> Challenge: Find the password to levelXX
+> Challenge: Find the password to **&NEXTLEVELTITLE&**
 
 In this challenge, the executable, 'introtempdir' creates a file and writes the
 password into it. You will need a place to write the file into so create one
