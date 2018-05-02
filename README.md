@@ -124,3 +124,4 @@ vagrant@ubuntu-xenial:~$
 + babyxor - simple single byte xor cryptography challenge
 + babyre - simple crackme involving dictionaries
 + babyrsa - basic RSA challenge
++ babypwn - simple exploitation challenge
