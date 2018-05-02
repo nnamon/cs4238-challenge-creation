@@ -1,27 +1,26 @@
 - name: create level
   block:
-    - name: lookup password from password file
-      set_fact: "{{ level }}_password={{ lookup('file', 'challenges/{{ level }}/src/password') }}"
-
-    - name: check for next level password file
-      become: false
-      local_action: stat path="{{ 'challenges/level%02d/src/password' | format(level_num + 1) }}"
-      register: next_level_password_file
-
-    - name: define levelXX_flag variable - i.e. password for next level
-      set_fact: "{{ level }}_flag={{ lookup('file', '{{ next_level_password_file.stat.path }}' )}}"
-      when: next_level_password_file.stat.exists
-
     - name: encrypt password
-      shell: "echo {{ vars[level + '_password'] | quote }} | openssl passwd -1 -stdin"
-      register: encypted_password
+      shell: "echo {{ vars['cur_password'] | quote }} | openssl passwd -1 -stdin"
+      register: encrypted_password
 
     - name: create user
       user:
         name: "{{ level }}"
-        password: "{{ encypted_password.stdout }}"
+        password: "{{ encrypted_password.stdout }}"
         shell: /bin/bash
         groups: leveluser
+      when: level != "root"
+
+    - name: lookup next password from password file
+      set_fact: "cur_password={{ lookup('file', 'challenges/{{ level }}/src/password') }}"
+      when: level != "root"
+
+    - name: change root password
+      user:
+        name: "root"
+        password: "{{ encrypted_password.stdout }}"
+      when: level == "root"
 
 - name: copy instructions, hints and solution
   copy:
@@ -30,18 +29,41 @@
     group: "{{ level }}"
     owner: "{{ level }}"
     mode: 0400
+  when: level != "root"
+
+- name: replace placeholder values in the instructions
+  block:
+    - name: replace the level number
+      replace:
+        path: "{{ homedir }}/docs/instructions.md"
+        regexp: "&LEVELNUMBER&"
+        replace: "{{ level_num }}"
+    - name: replace the next level name
+      replace:
+        path: "{{ homedir }}/docs/instructions.md"
+        regexp: "&NEXTLEVELTITLE&"
+        replace: "{{ levels_list[level_num + 1] }}"
+    - name: add reminder that instruction is an alias
+      lineinfile:
+        path: "{{ homedir }}/docs/instructions.md"
+        insertafter: EOF
+        line: "---\nPress `q` to exit. If you need to see these instructions again, type `instructions`."
+  when: level != "root"
 
 - name: present instructions when logging into level
   lineinfile:
     path: "{{ homedir }}/.bashrc"
     insertafter: EOF
     line: "{{ item }}"
+    create: yes
   with_items:
     - clear
+    - cd ~
     - alias instructions='mdless "{{ homedir }}"/docs/instructions.md'
     - alias hints='mdless "{{ homedir }}"/docs/hints.md'
     - alias solution='mdless "{{ homedir }}"/docs/solution.md'
     - instructions
+  when: level != "root"
 
 - name: set homedir permissions
   block:
@@ -57,6 +79,7 @@
         group: "{{ level }}"
         path: "{{ homedir }}"
         mode: u=rwX,g=rX,o=
+  when: level != "root"
 
 - name: run level specific playbook
   import_tasks: "challenges/{{ level }}/setup.yml"

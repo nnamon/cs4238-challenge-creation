@@ -4,11 +4,7 @@
   apt:
     name: "{{ item }}"
   with_items:
-    - python-pip
-
-- name: install xortool
-  pip:
-    name: xortool
+    - gdb
 
 - name: put the contents of distrib into the home directory
   copy:
@@ -17,3 +13,8 @@
     owner: "root"
     group: "{{ level }}"
     mode: 0440
+
+- name: make babyre executable
+  file:
+    path: "{{ homedir }}/babyre"
+    mode: 0550

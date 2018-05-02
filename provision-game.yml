@@ -37,17 +37,32 @@
         owner: root
         group: root
         mode: 0711
-        
+
+    - name: set an initial cur_password fact
+      set_fact:
+        cur_password: "wargame"
+
+    - name: set the list of levels to generate
+      set_fact:
+        levels_list:
+          - introduction
+          - introstrings
+          - introtempdir
+          - introexfil
+          - intronc
+          - intropwntools
+          - babyxor
+          - babyre
+          - root
+
     - include_role:
         name: level
       vars:
-        homedir: "/home/{{ level }}"
-      loop:
-        - thebeginning
-        - level01
-        - intronc
+        homedir: "/home/{{ level_tuple.1 }}"
+        level: "{{ level_tuple.1 }}"
+      with_indexed_items: "{{ levels_list }}"
       loop_control:
-        loop_var: level
+        loop_var: level_tuple
         index_var: level_num
 
     - include_role:

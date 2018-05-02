@@ -3,7 +3,7 @@
 - name: put --help in homedir
   copy:
     dest: "{{ homedir }}/--help"
-    content: "{{ vars[level + '_flag'] }}"
+    content: "f1rst_st3p_0n_y0ur_j0urn3y"
     owner: "root"
     group: "{{ level }}"
     mode: 0440

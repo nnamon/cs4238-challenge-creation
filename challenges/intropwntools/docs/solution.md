@@ -1,0 +1,70 @@
+# SOLUTION
+
+The solution script:
+
+```py
+from pwn import *
+
+def main():
+    # Setup a remote connection
+    p = remote("wargame", 31338)
+
+    # Receive data until we get the name prompt
+    p.recvuntil("please tell me your name:")
+    log.info("Received prompt for name.")
+
+    # Send the name
+    name = "Nikolas"
+    p.sendline(name)
+    log.info("Sent '%s'." % name)
+
+    # Receive data until we get the prompt for the first key
+    p.recvuntil("first secret key.")
+    log.info("Received prompt for first key.")
+
+    # Send the first key
+    key1 = 0xdeadbeef
+    p.send(p32(key1))
+    log.info("Sent first key: 0x%x" % key1)
+
+    # Receive data until we get the prompt for the second key
+    p.recvuntil("second secret key.")
+    log.info("Received prompt for second key.")
+
+    # Send the second key
+    key2 = 0xcafebabe
+    p.send(p32(key2))
+    log.info("Sent second key: 0x%x" % key2)
+
+    # Receive data until we get the prompt for the third key
+    p.recvuntil("One more to go.")
+    log.info("Received prompt for second key.")
+
+    # Send the third key
+    key3 = 0xfeedface
+    p.send(p32(key3))
+    log.info("Sent third key: 0x%x" % key3)
+
+    # Receive until the encryption key is printed
+    p.recvuntil("Here is your decryption key: 0x")
+
+    # Receive the encryption key
+    encryption_key = p.recvline().strip().decode("hex")
+    log.info("Received encryption key: %s." % encryption_key.encode("hex"))
+
+    # Receive until the encrypted flag is printed
+    p.recvuntil("Here is your flag: 0x")
+
+    # Receive the encrypted flag
+    encrypted_flag = p.recvline().strip().decode("hex")
+    log.info("Received encrypted flag: %s." % encrypted_flag.encode("hex"))
+
+    # Decrypt the flag
+    thing1 = encryption_key
+    thing2 = encrypted_flag
+    decrypted = xor(thing1, thing2)
+    log.success("Decrypted flag: %s" % decrypted)
+
+if __name__ == "__main__":
+    main()
+```

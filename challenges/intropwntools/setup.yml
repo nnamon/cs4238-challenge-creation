@@ -2,11 +2,23 @@
 
 - name: set the serviceuser fact
   set_fact:
-    serviceuser: introncservice
+    serviceuser: intropwntoolsservice
 
 - name: update repositories cache and install dependencies
   apt:
-    name: xinetd
+    name: "{{ item }}"
+  with_items:
+    - xinetd
+    - python-pip
+    - python-dev
+    - git
+    - libssl-dev
+    - libffi-dev
+    - build-essential
+
+- name: install pwntools
+  pip:
+    name: pwntools
 
 - name: create service user
   user:
@@ -39,15 +51,23 @@
 
 - name: setup the xinetd configuration files
   copy:
-    src: "service/introncservice"
+    src: "service/{{ serviceuser }}"
     dest: "/etc/xinetd.d/"
 
 - name: make the python script executable
   file:
-    path: "/service/introncservice/intronc.py"
+    path: "/service/{{ serviceuser }}/server.py"
     mode: 0450
 
 - name: restart xinetd
   service:
     name: xinetd
     state: restarted
+
+- name: put the contents of distrib into the home directory
+  copy:
+    src: "distrib/"
+    dest: "{{ homedir }}/"
+    owner: "root"
+    group: "{{ level }}"
+    mode: 0440
