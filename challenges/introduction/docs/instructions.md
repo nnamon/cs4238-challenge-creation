@@ -29,11 +29,13 @@ docs
 0 directories, 3 files
 ```
 
-#### hints
-View the hints file.
+#### Hints
 
-#### solution
-Give up. Reveal how its done. Get the password to the next level. `su` on up...
+Type `hints`.
+
+#### Solution
+
+Type `solution`.
 
 ---
 
