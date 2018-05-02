@@ -123,4 +123,4 @@ vagrant@ubuntu-xenial:~$
 + intropwntools - demonstrates the use of pwntools for exploit development
 + babyxor - simple single byte xor cryptography challenge
 + babyre - simple crackme involving dictionaries
-
++ babyrsa - basic RSA challenge
