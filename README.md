@@ -3,12 +3,14 @@
 ## Skip the docs and get playing
 
 ```sh
-$ ssh level00@<machine>
+$ ssh introduction@<machine>
 ```
-> Password: `GowG2kEEg8ON97RL`
+> Password: `wargame`
 
 ## How to provision the game
+
 ### ...on local machine
+
 First install ansible on your machine. Refer to the docs:
 
 http://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
@@ -112,5 +114,13 @@ vagrant@ubuntu-xenial:~$
 ```
 
 ## Workflow
-+ level00 - orientation - introduce the workflow of the game.
+
++ introduction - introduces the game
++ introstrings - using basic linux tools for string extraction
++ introtempdir - demonstrates the use of the temporary directories
++ introexfil - introduces how to get files off the system for local analysis
++ intronc - introduces the use of netcat
++ intropwntools - demonstrates the use of pwntools for exploit development
++ babyxor - simple single byte xor cryptography challenge
++ babyre - simple crackme involving dictionaries
 
