@@ -30,6 +30,18 @@
         name: leveluser
         state: present
 
+    - name: allow passworded ssh logins
+      block:
+        - name: enable passworded ssh in config
+          replace:
+            path: "/etc/ssh/sshd_config"
+            regexp: "PasswordAuthentication no"
+            replace: "PasswordAuthentication yes"
+        - name: restart ssh
+          service:
+            name: ssh
+            state: restarted
+
     - name: create a directory to hold services
       file:
         path: /service/
