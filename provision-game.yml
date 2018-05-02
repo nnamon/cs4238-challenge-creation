@@ -38,6 +38,17 @@
         group: root
         mode: 0711
 
+    - name: install gef
+      block:
+        - name: remove gef sources
+          file:
+            state: absent
+            path: "/service/gef"
+        - name: get gef sources
+          git:
+            repo: https://github.com/hugsy/gef.git
+            dest: /service/gef
+
     - name: set an initial cur_password fact
       set_fact:
         cur_password: "wargame"
@@ -54,6 +65,7 @@
           - babyxor
           - babyre
           - babyrsa
+          - babypwn
           - root
 
     - include_role:
