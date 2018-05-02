@@ -53,6 +53,7 @@
           - intropwntools
           - babyxor
           - babyre
+          - babyrsa
           - root
 
     - include_role:
