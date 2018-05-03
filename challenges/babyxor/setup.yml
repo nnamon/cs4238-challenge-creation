@@ -6,6 +6,11 @@
   with_items:
     - python-pip
 
+- name: upgrade pip
+  pip:
+    name: pip
+    state: latest
+
 - name: install xortool
   pip:
     name: xortool
