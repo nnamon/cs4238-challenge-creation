@@ -22,6 +22,15 @@
         password: "{{ encrypted_password.stdout }}"
       when: level == "root"
 
+- name: install gef per user
+  copy:
+    dest: "{{ homedir }}/.gdbinit"
+    content: "source /service/gef/gef.py"
+    owner: "root"
+    group: "{{ level }}"
+    mode: 0440
+  when: level != "root"
+
 - name: copy instructions, hints and solution
   copy:
     src:  "challenges/{{ level }}/docs"

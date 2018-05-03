@@ -62,7 +62,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=6    changed=5    unreachable=0    failed=0
 ```
 
-### Vagrant Development Environment
+### ...in a Vagrant Development Environment
 
 To bring up a local development environment, do the following:
 
@@ -113,6 +113,14 @@ Last login: Tue May  1 09:36:22 2018 from 10.0.2.2
 vagrant@ubuntu-xenial:~$
 ```
 
+### ...on a remote SSH box
+
+To run the playbook against an SSH server you have root access to:
+
+```shell
+ansible-playbook -i 206.189.43.131, provision-game.yml -u root -vv
+```
+
 ## Workflow
 
 + introduction - introduces the game
@@ -123,4 +131,5 @@ vagrant@ubuntu-xenial:~$
 + intropwntools - demonstrates the use of pwntools for exploit development
 + babyxor - simple single byte xor cryptography challenge
 + babyre - simple crackme involving dictionaries
-
++ babyrsa - basic RSA challenge
++ babypwn - simple exploitation challenge

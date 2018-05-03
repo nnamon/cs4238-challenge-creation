@@ -4,7 +4,7 @@
   become: true
   pre_tasks:
     - name: 'install python2'
-      raw: sudo apt-get -y install python-simplejson
+      raw: sudo apt-get update && sudo apt-get -y install python-simplejson
   tasks:
     - name: update apt cache
       apt:
@@ -30,6 +30,18 @@
         name: leveluser
         state: present
 
+    - name: allow passworded ssh logins
+      block:
+        - name: enable passworded ssh in config
+          replace:
+            path: "/etc/ssh/sshd_config"
+            regexp: "PasswordAuthentication no"
+            replace: "PasswordAuthentication yes"
+        - name: restart ssh
+          service:
+            name: ssh
+            state: restarted
+
     - name: create a directory to hold services
       file:
         path: /service/
@@ -37,6 +49,17 @@
         owner: root
         group: root
         mode: 0711
+
+    - name: install gef
+      block:
+        - name: remove gef sources
+          file:
+            state: absent
+            path: "/service/gef"
+        - name: get gef sources
+          git:
+            repo: https://github.com/hugsy/gef.git
+            dest: /service/gef
 
     - name: set an initial cur_password fact
       set_fact:
@@ -53,6 +76,8 @@
           - intropwntools
           - babyxor
           - babyre
+          - babyrsa
+          - babypwn
           - root
 
     - include_role:
