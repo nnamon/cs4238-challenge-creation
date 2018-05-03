@@ -113,6 +113,14 @@ Last login: Tue May  1 09:36:22 2018 from 10.0.2.2
 vagrant@ubuntu-xenial:~$
 ```
 
+To access services on the vagrant box from the host system, you may use the IP
+address `10.3.13.37`. For instance,
+
+```shell
+nc 10.3.13.37 31337
+What fell on Issac Newton's head?
+```
+
 ### ...on a remote SSH box
 
 To run the playbook against an SSH server you have root access to:
