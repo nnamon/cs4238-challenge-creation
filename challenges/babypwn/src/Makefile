@@ -5,5 +5,5 @@ all: babypwn
 clean:
 	rm -f babypwn *.o core core.*
 
-authed: babyre.o
+babypwn: babypwn.o
 	${CC} ${CFLAGS} -o babypwn babypwn.o ${LIBS}

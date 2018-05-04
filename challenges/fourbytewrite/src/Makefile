@@ -5,5 +5,5 @@ all: fourbytewrite
 clean:
 	rm -f fourbytewrite *.o core core.*
 
-authed: babyre.o
+fourbytewrite: fourbytewrite.o
 	${CC} ${CFLAGS} -o fourbytewrite fourbytewrite.o ${LIBS}

@@ -143,3 +143,4 @@ ansible-playbook -i 206.189.43.131, provision-game.yml -u root -vv
 + babypwn - simple exploitation challenge
 + babyweb - simple local file inclusion PHP web challenge
 + fourbytewrite - GOT overwrite pwnable
++ blackbeauty - overwrite global variables to get shell

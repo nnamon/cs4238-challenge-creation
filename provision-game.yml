@@ -85,6 +85,7 @@
           - babypwn
           - babyweb
           - fourbytewrite
+          - blackbeauty
           - root
 
     - include_role:
