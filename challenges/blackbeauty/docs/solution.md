@@ -1,5 +1,12 @@
 # SOLUTION
 
+Setting the offset to -8 allows us to write the the symbol member of the
+ticker\_tape struct. Now, we can write the address of the src\_file global
+variable to the member byte by byte. After we have overwritten the char array
+pointer, we can choose to change the symbol to overwrite the src\_file variable
+with "/bin/sh". Finally, we trigger the shell by executing the view source
+command.
+
 The solution script:
 
 ```py
