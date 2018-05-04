@@ -86,6 +86,7 @@
           - babyweb
           - fourbytewrite
           - blackbeauty
+          - dragrace
           - root
 
     - include_role:
