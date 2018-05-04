@@ -1,13 +1,13 @@
 # INSTRUCTIONS
 #
-## Level &LEVELNUMBER&: Babypwn
+## Level &LEVELNUMBER&: Four Byte Write
 
 > Challenge: Find the password to **&NEXTLEVELTITLE&**
 
-`nc wargame 31339`.
+`nc wargame 31340`.
 
-Can you pwn `babypwn`?
+Can you write your way to a shell in `fourbytewrite`?
 
-Flag is at `/service/babypwnservice/flag`.
+Flag is at `/service/fourbytewriteservice/flag`.
 
 ---

@@ -1,3 +1,3 @@
 # HINTS
 
-Try to figure out the offsets.
+Can you get control of the instruction pointer?
