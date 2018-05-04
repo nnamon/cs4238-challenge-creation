@@ -141,3 +141,5 @@ ansible-playbook -i 206.189.43.131, provision-game.yml -u root -vv
 + babyre - simple crackme involving dictionaries
 + babyrsa - basic RSA challenge
 + babypwn - simple exploitation challenge
++ babyweb - simple local file inclusion PHP web challenge
++ fourbytewrite - GOT overwrite pwnable

@@ -1,0 +1,12 @@
+service fourbytewriteservice
+{
+    disable = no
+    socket_type = stream
+    protocol    = tcp
+    wait        = no
+    user        = fourbytewriteservice
+    bind        = 0.0.0.0
+    server      = /service/fourbytewriteservice/fourbytewrite
+    type        = UNLISTED
+    port        = 31340
+}

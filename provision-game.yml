@@ -84,6 +84,7 @@
           - babyrsa
           - babypwn
           - babyweb
+          - fourbytewrite
           - root
 
     - include_role:
