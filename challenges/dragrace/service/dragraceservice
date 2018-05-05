@@ -1,0 +1,12 @@
+service dragraceservice
+{
+    disable = no
+    socket_type = stream
+    protocol    = tcp
+    wait        = no
+    user        = dragraceservice
+    bind        = 0.0.0.0
+    server      = /service/dragraceservice/dragrace
+    type        = UNLISTED
+    port        = 31342
+}

@@ -1,0 +1,63 @@
+---
+
+- name: set the serviceuser fact
+  set_fact:
+    serviceuser: fourbytewriteservice
+
+- name: update repositories cache and install dependencies
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - xinetd
+
+- name: create service user
+  user:
+    name: "{{ serviceuser }}"
+    shell: /usr/sbin/nologin
+    home: "/service/{{ serviceuser }}"
+    groups: "serviceuser"
+
+- name: put the contents of service into the service account home directory
+  copy:
+    src: "service/"
+    dest: "/service/{{ serviceuser }}"
+    owner: "root"
+    group: "{{ serviceuser }}"
+
+- name: set the directory permissions
+  block:
+    - name: tighten the permissions
+      file:
+        recurse: yes
+        mode: 440
+        path: "/service/{{ serviceuser }}"
+    - name: relax the permissions
+      file:
+        recurse: yes
+        owner: root
+        group: "{{ serviceuser }}"
+        path: "/service/{{ serviceuser }}"
+        mode: u=rwX,g=rX,o=
+
+- name: setup the xinetd configuration files
+  copy:
+    src: "service/{{ serviceuser }}"
+    dest: "/etc/xinetd.d/"
+
+- name: make the pwnable executable
+  file:
+    path: "/service/{{ serviceuser }}/fourbytewrite"
+    mode: 0450
+
+- name: restart xinetd
+  service:
+    name: xinetd
+    state: restarted
+
+- name: put the contents of distrib into the home directory
+  copy:
+    src: "distrib/"
+    dest: "{{ homedir }}/"
+    owner: "root"
+    group: "{{ level }}"
+    mode: 0440

@@ -5,5 +5,5 @@ all: introtempdir
 clean:
 	rm -f introtempdir *.o core core.*
 
-authed: introtempdir.o
+introtempdir: introtempdir.o
 	${CC} ${CFLAGS} -o introtempdir introtempdir.o ${LIBS}

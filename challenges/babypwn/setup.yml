@@ -13,9 +13,9 @@
 - name: create service user
   user:
     name: "{{ serviceuser }}"
-    shell: /bin/false
+    shell: /usr/sbin/nologin
     home: "/service/{{ serviceuser }}"
-    groups: "leveluser"
+    groups: "serviceuser"
 
 - name: put the contents of service into the service account home directory
   copy:

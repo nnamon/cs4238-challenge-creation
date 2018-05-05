@@ -30,6 +30,11 @@
         name: leveluser
         state: present
 
+    - name: create the group serviceuser to apply security policies to all levels
+      group:
+        name: serviceuser
+        state: present
+
     - name: allow passworded ssh logins
       block:
         - name: enable passworded ssh in config
@@ -47,7 +52,7 @@
         path: /service/
         state: directory
         owner: root
-        group: root
+        group: serviceuser
         mode: 0711
 
     - name: install gef
@@ -78,6 +83,10 @@
           - babyre
           - babyrsa
           - babypwn
+          - babyweb
+          - fourbytewrite
+          - blackbeauty
+          - dragrace
           - root
 
     - include_role:

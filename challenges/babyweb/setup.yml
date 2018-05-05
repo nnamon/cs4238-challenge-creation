@@ -1,0 +1,53 @@
+---
+
+- name: set the serviceuser fact
+  set_fact:
+    serviceuser: babywebservice
+
+- name: update repositories cache and install dependencies
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - apache2
+    - php
+    - libapache2-mod-php
+    - libapache2-mpm-itk
+
+- name: create service user
+  user:
+    name: "{{ serviceuser }}"
+    shell: /usr/sbin/nologin
+    home: "/service/{{ serviceuser }}"
+    groups: "serviceuser"
+
+- name: put the contents of service into the service account home directory
+  copy:
+    src: "service/"
+    dest: "/service/{{ serviceuser }}"
+    owner: "root"
+    group: "{{ serviceuser }}"
+
+- name: set the directory permissions
+  block:
+    - name: tighten the permissions
+      file:
+        recurse: yes
+        mode: 440
+        path: "/service/{{ serviceuser }}"
+    - name: relax the permissions
+      file:
+        recurse: yes
+        owner: root
+        group: "{{ serviceuser }}"
+        path: "/service/{{ serviceuser }}"
+        mode: u=rwX,g=rX,o=
+
+- name: setup the apache configuration files
+  copy:
+    src: "service/{{ serviceuser }}.conf"
+    dest: "/etc/apache2/sites-enabled/"
+
+- name: restart apache2
+  service:
+    name: apache2
+    state: restarted

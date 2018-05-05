@@ -11,7 +11,7 @@
 - name: create service user
   user:
     name: "{{ serviceuser }}"
-    shell: /bin/false
+    shell: /usr/sbin/nologin
     home: "/service/{{ serviceuser }}"
     groups: "leveluser"
 

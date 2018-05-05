@@ -5,5 +5,5 @@ all: babyre
 clean:
 	rm -f babyre *.o core core.*
 
-authed: babyre.o
+babyre: babyre.o
 	${CC} ${CFLAGS} -o babyre babyre.o ${LIBS}

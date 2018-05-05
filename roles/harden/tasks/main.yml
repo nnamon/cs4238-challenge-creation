@@ -17,4 +17,4 @@
   lineinfile:
     path: "/etc/security/limits.conf"
     insertafter: EOF
-    line: "@leveluser hard nproc 64"
+    line: "@leveluser hard nproc 64\n@serviceuser hard nproc 64"
