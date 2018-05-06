@@ -20,10 +20,3 @@
     - pyasn1
     - git+https://github.com/ius/rsatool
 
-- name: put the contents of distrib into the home directory
-  copy:
-    src: "distrib/"
-    dest: "{{ homedir }}/"
-    owner: "root"
-    group: "{{ level }}"
-    mode: 0440

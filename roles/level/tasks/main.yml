@@ -90,5 +90,14 @@
         mode: u=rwX,g=rX,o=
   when: level != "root"
 
+- name: put the contents of distrib into the home directory
+  copy:
+    src: "challenges/{{ level }}/distrib/"
+    dest: "{{ homedir }}/"
+    owner: "root"
+    group: "{{ level }}"
+    mode: 0440
+  ignore_errors: true
+
 - name: run level specific playbook
   import_tasks: "challenges/{{ level }}/setup.yml"
