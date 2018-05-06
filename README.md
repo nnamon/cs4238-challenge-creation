@@ -53,6 +53,10 @@ PLAY [all] *********************************************************************
 
 TASK [install python2] *********************************************************
 ...
+```
+
+To login as a sudoer:
+```
 $ vagrant ssh
 vagrant ssh
 Welcome to Ubuntu 16.04.4 LTS (GNU/Linux 4.4.0-122-generic x86_64)
@@ -105,4 +109,3 @@ ansible-playbook -i 206.189.43.131, provision-game.yml -u root -vv
 + blackbeauty - overwrite global variables to get shell
 + dragrace - bypass constraints and jump to shellcode
 + angelica - python pickle challenge
-
