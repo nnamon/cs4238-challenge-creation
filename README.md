@@ -104,3 +104,5 @@ ansible-playbook -i 206.189.43.131, provision-game.yml -u root -vv
 + fourbytewrite - GOT overwrite pwnable
 + blackbeauty - overwrite global variables to get shell
 + dragrace - bypass constraints and jump to shellcode
++ angelica - python pickle challenge
+

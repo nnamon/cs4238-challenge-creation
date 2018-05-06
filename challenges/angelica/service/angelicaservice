@@ -1,0 +1,12 @@
+service angelicaservice
+{
+    disable = no
+    socket_type = stream
+    protocol    = tcp
+    wait        = no
+    user        = angelicaservice
+    bind        = 0.0.0.0
+    server      = /service/angelicaservice/angelica.py
+    type        = UNLISTED
+    port        = 31343
+}
