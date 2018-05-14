@@ -3,7 +3,7 @@
 The file `--help` can be read by referring to it by its location, either by full path
 
 ```sh
-cat /home/level00/--help
+cat /home/introduction/--help
 ```
 
 or relative
