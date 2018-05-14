@@ -1,25 +1,35 @@
 ---
 
-- name: copy rootkit into /root
+- name: hide password file from file tab completion
+  lineinfile:
+    path: "{{ homedir }}/.bashrc"
+    insertafter: EOF
+    line: "{{ item }}"
+    create: yes
+  with_items:
+    - complete -f -X '.password' -D
+    - complete -f -X '.password' cat ls more less awk sed grep
+
+- name: copy fake command scripts
   copy:
-    dest: /root/
-    src: src/rootkit.ko
-    checksum: 6a7658c81d213cfc98077fe3d7d7494994e6ab12
+    dest: /usr/local/{{ level }}/
+    src: "{{ item }}"
     owner: root
-    group: root
-    mode: 0500
+    group: "{{ level }}"
+    mode: 0750
+  with_items:
+    - src/ls
+    - src/cat
 
-- name: copy rootkit client into /root
-  copy:
-    dest: /root/
-    src: src/client
-    checksum: 4530fdfb702f7c8022ecb02aa7a75ff9a28f8806
-    owner: root
-    group: root
-    mode: 0500
+- name: remove default ls alias
+  lineinfile:
+    path: "{{ homedir }}/.bashrc"
+    regexp: 'alias ls='
+    state: absent
 
-- name: load rootkit
-  command: insmod /root/rootkit.ko
-
-- name: hide .password file globally
-  command: /root/client --hide-file=.password
+- name: prepend fake scripts to PATH
+  lineinfile:
+    path: "{{ homedir }}/.bashrc"
+    insertafter: EOF
+    regexp: PATH=.*
+    line:   PATH=/usr/local/{{ level }}:$PATH

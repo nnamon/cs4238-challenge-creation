@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cmd='/bin/ls $@ --color=always'
+
+if [[ $@ =~ -[a-km-zA-KM-Z]*[l][a-km-zA-KM-Z]* ]]; then
+  eval $cmd | grep -v .password
+elif [[ $@ =~ -[^l]+ ]]; then
+  eval $cmd | grep -v .password | xargs
+else
+  eval $cmd
+fi
