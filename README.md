@@ -1,11 +1,33 @@
-# cs4238-challenge-creation
+# Wargame
+## Improve your cybersecurity skills on Linux
+---
 
 ## Skip the docs and get playing
 
+From a command terminal, execute the following command.
+
 ```sh
-$ ssh introduction@<machine>
+$ ssh introduction@10.3.13.37
 ```
 > Password: `wargame`
+
+## List of Challenges
+
++ introduction - introduces the game.
++ introstrings - using basic linux tools for string extraction.
++ introtempdir - demonstrates the use of the temporary directories.
++ introexfil - introduces how to get files off the system for local analysis
++ intronc - introduces the use of netcat
++ intropwntools - demonstrates the use of pwntools for exploit development
++ babyxor - simple single byte xor cryptography challenge
++ babyre - simple crackme involving dictionaries
++ babyrsa - basic RSA challenge
++ babypwn - simple exploitation challenge
++ babyweb - simple local file inclusion PHP web challenge
++ fourbytewrite - GOT overwrite pwnable
++ blackbeauty - overwrite global variables to get shell
++ dragrace - bypass constraints and jump to shellcode
++ angelica - python pickle challenge
 
 ## How to provision the game
 
@@ -91,21 +113,3 @@ To run the playbook against an SSH server you have root access to:
 ```shell
 ansible-playbook -i 206.189.43.131, provision-game.yml -u root -vv
 ```
-
-## Workflow
-
-+ introduction - introduces the game
-+ introstrings - using basic linux tools for string extraction
-+ introtempdir - demonstrates the use of the temporary directories
-+ introexfil - introduces how to get files off the system for local analysis
-+ intronc - introduces the use of netcat
-+ intropwntools - demonstrates the use of pwntools for exploit development
-+ babyxor - simple single byte xor cryptography challenge
-+ babyre - simple crackme involving dictionaries
-+ babyrsa - basic RSA challenge
-+ babypwn - simple exploitation challenge
-+ babyweb - simple local file inclusion PHP web challenge
-+ fourbytewrite - GOT overwrite pwnable
-+ blackbeauty - overwrite global variables to get shell
-+ dragrace - bypass constraints and jump to shellcode
-+ angelica - python pickle challenge
